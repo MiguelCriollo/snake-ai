@@ -1,5 +1,5 @@
 let classifier;
-let imageModelURL = 'SU URL AQUI';
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/bjEWPBfWT/';
 let video;
 let flippedVideo;
 let label = '';
@@ -33,6 +33,7 @@ function classifyVideo() {
   flippedVideo = ml5.flipImage(video);
   classifier.classify(flippedVideo, gotResult);
   flippedVideo.remove();
+  
 }
 
 function foodLocation() {
@@ -41,16 +42,18 @@ function foodLocation() {
   food = createVector(x, y);
 }
 
-function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
+function keyPressed(keyCode) {
+  if (keyCode === "IZQUIERDA") {
     snake.setDir(-1, 0);
-  } else if (keyCode === RIGHT_ARROW) {
+  } else if (keyCode === "DERECHA") {
     snake.setDir(1, 0);
-  } else if (keyCode === DOWN_ARROW) {
+  } else if (keyCode === "ABAJO") {
     snake.setDir(0, 1);
-  } else if (keyCode === UP_ARROW) {
+  } else if (keyCode === "ARRIBA") {
     snake.setDir(0, -1);
-  } else if (key == ' ') {
+  }else if (keyCode === "NADA"){
+    snake.setDir(0, 0);
+  }else if (key == ' ') {
     snake.grow();
   }
 }
@@ -62,7 +65,8 @@ function draw() {
   textSize(16);
   textAlign(CENTER);
   text(label, width / 2, height - 4);
-  
+  console.log(label);
+  keyPressed(label)
   scale(rez);
 
   if (snake.eat(food)) {
@@ -90,3 +94,4 @@ function gotResult(error, results) {
   label = results[0].label;
   classifyVideo();
 }
+
