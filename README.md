@@ -1,0 +1,2 @@
+# snake-ai
+ GAME WITH TEACHABLE MACHINE
